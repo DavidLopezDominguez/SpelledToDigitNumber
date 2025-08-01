@@ -2,10 +2,6 @@ package Presentation;
 
 import Business.ParserManager;
 
-/**
- * Este proyecto va a recibir un string en ingles representando un número en lenguaje natural
- * y tenemos que retornar el mismo número pero en dígitos.
- */
 public class Controller {
     private UIcontroller uicontroller;
     private ParserManager parserManager;
@@ -15,6 +11,9 @@ public class Controller {
         parserManager = new ParserManager();
     }
 
+    /**
+     * That function runs the project.
+     */
     public void run() {
         uicontroller.showMessage("Insert a spelled number: ");
         String numberString = uicontroller.scanString();

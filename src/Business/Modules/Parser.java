@@ -3,6 +3,9 @@ package Business.Modules;
 import java.util.LinkedList;
 
 public class Parser {
+    /**
+     * Array of strings with the multipliers.
+     */
     private String[] noNumbers = {"Hundred",
             "Thousand",
             "Ten thousand",
@@ -21,62 +24,44 @@ public class Parser {
             "Duodecillion",
             "Centillion"};
 
-    private String[] numbers0to99 = {
-            "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
-            "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen",
-            "Twenty", "Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four", "Twenty-five", "Twenty-six", "Twenty-seven", "Twenty-eight", "Twenty-nine",
-            "Thirty", "Thirty-one", "Thirty-two", "Thirty-three", "Thirty-four", "Thirty-five", "Thirty-six", "Thirty-seven", "Thirty-eight", "Thirty-nine",
-            "Forty", "Forty-one", "Forty-two", "Forty-three", "Forty-four", "Forty-five", "Forty-six", "Forty-seven", "Forty-eight", "Forty-nine",
-            "Fifty", "Fifty-one", "Fifty-two", "Fifty-three", "Fifty-four", "Fifty-five", "Fifty-six", "Fifty-seven", "Fifty-eight", "Fifty-nine",
-            "Sixty", "Sixty-one", "Sixty-two", "Sixty-three", "Sixty-four", "Sixty-five", "Sixty-six", "Sixty-seven", "Sixty-eight", "Sixty-nine",
-            "Seventy", "Seventy-one", "Seventy-two", "Seventy-three", "Seventy-four", "Seventy-five", "Seventy-six", "Seventy-seven", "Seventy-eight", "Seventy-nine",
-            "Eighty", "Eighty-one", "Eighty-two", "Eighty-three", "Eighty-four", "Eighty-five", "Eighty-six", "Eighty-seven", "Eighty-eight", "Eighty-nine",
-            "Ninety", "Ninety-one", "Ninety-two", "Ninety-three", "Ninety-four", "Ninety-five", "Ninety-six", "Ninety-seven", "Ninety-eight", "Ninety-nine"
-    };
-
-
+    /**
+     * This function multiplies the number with the corresponding pultiplier.
+     *
+     * @param numberName: the multiplier in words.
+     * @param number: the number to multiply.
+     * @return the number multiplied.
+     */
     public static long scaleNumber(String numberName, long number) {
-        switch (numberName) {
-            case "Hundred":
-                return number * 100L;
-            case "Thousand":
-                return number * 1_000L;
-            case "Ten thousand":
-                return number * 10_000L;
-            case "Hundred thousand":
-                return number * 100_000L;
-            case "Million":
-                return number * 1_000_000L;
-            case "Billion":
-                return number * 1_000_000_000L;
-            case "Trillion":
-                return number * 1_000_000_000_000L;
-            case "Quadrillion":
-                return number * 1_000_000_000_000_000L;
-            case "Quintillion":
-                return number * 1_000_000_000_000_000_000L;
-            case "Sextillion":
-                return number * (long)Math.pow(10, 21);
-            case "Septillion":
-                return number * (long)Math.pow(10, 24);
-            case "Octillion":
-                return number * (long)Math.pow(10, 27);
-            case "Nonillion":
-                return number * (long)Math.pow(10, 30);
-            case "Decillion":
-                return number * (long)Math.pow(10, 33);
-            case "Undecillion":
-                return number * (long)Math.pow(10, 36);
-            case "Duodecillion":
-                return number * (long)Math.pow(10, 39);
-            case "Centillion":
-                // Centillion = 10^303, too large for long → throw exception or use BigInteger
-                throw new IllegalArgumentException("Centillion is too large for long. Use BigInteger.");
-            default:
-                throw new IllegalArgumentException("Unknown number name: " + numberName);
-        }
+        // Centillion = 10^303, too large for long → throw exception or use BigInteger
+        return switch (numberName) {
+            case "Hundred" -> number * 100L;
+            case "Thousand" -> number * 1_000L;
+            case "Ten thousand" -> number * 10_000L;
+            case "Hundred thousand" -> number * 100_000L;
+            case "Million" -> number * 1_000_000L;
+            case "Billion" -> number * 1_000_000_000L;
+            case "Trillion" -> number * 1_000_000_000_000L;
+            case "Quadrillion" -> number * 1_000_000_000_000_000L;
+            case "Quintillion" -> number * 1_000_000_000_000_000_000L;
+            case "Sextillion" -> number * (long) Math.pow(10, 21);
+            case "Septillion" -> number * (long) Math.pow(10, 24);
+            case "Octillion" -> number * (long) Math.pow(10, 27);
+            case "Nonillion" -> number * (long) Math.pow(10, 30);
+            case "Decillion" -> number * (long) Math.pow(10, 33);
+            case "Undecillion" -> number * (long) Math.pow(10, 36);
+            case "Duodecillion" -> number * (long) Math.pow(10, 39);
+            case "Centillion" ->
+                    throw new IllegalArgumentException("Centillion is too large for long. Use BigInteger.");
+            default -> throw new IllegalArgumentException("Unknown number name: " + numberName);
+        };
     }
 
+    /**
+     * That funcion returns the relative long number of the string.
+     *
+     * @param word: string to convert into a long number.
+     * @return the long number.
+     */
     public static long wordToNumber(String word) {
         switch (word) {
             case "Zero": return 0L;
@@ -184,6 +169,12 @@ public class Parser {
         }
     }
 
+    /**
+     * A boolean function that return if the string is a number or not.
+     *
+     * @param string: string to evaluate.
+     * @return true if is not a number and false if it is.
+     */
     private boolean isNotANumber(String string) {
         for (String number : noNumbers) {
             if (string.equalsIgnoreCase(number)) return true;
@@ -191,6 +182,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * That funcion converts a string into a number.
+     *
+     * @param string: a string with the number to convert.
+     * @return the number converted.
+     * @throws NumberFormatException
+     * @throws IndexOutOfBoundsException
+     * @throws IllegalArgumentException
+     */
     public long calculateNumber(String string) throws NumberFormatException, IndexOutOfBoundsException, IllegalArgumentException {
         long number = 0;
         long tempNumber = 0;
