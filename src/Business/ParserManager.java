@@ -7,7 +7,7 @@ import Business.Modules.Parser;
  */
 public class ParserManager {
     /**
-     * That funcion calls the Parser class to calculate the number.
+     * That function calls the Parser class to calculate the number.
      *
      * @param numberString: a string with the number to convert.
      * @return the number converted.

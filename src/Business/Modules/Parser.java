@@ -25,14 +25,14 @@ public class Parser {
             "Centillion"};
 
     /**
-     * This function multiplies the number with the corresponding pultiplier.
+     * This function multiplies the number with the corresponding multiplier.
      *
      * @param numberName: the multiplier in words.
      * @param number: the number to multiply.
      * @return the number multiplied.
      */
     public static long scaleNumber(String numberName, long number) {
-        // Centillion = 10^303, too large for long → throw exception or use BigInteger
+
         return switch (numberName) {
             case "Hundred" -> number * 100L;
             case "Thousand" -> number * 1_000L;
@@ -51,13 +51,13 @@ public class Parser {
             case "Undecillion" -> number * (long) Math.pow(10, 36);
             case "Duodecillion" -> number * (long) Math.pow(10, 39);
             case "Centillion" ->
-                    throw new IllegalArgumentException("Centillion is too large for long. Use BigInteger.");
+                    throw new IllegalArgumentException("Centillion is too large.");
             default -> throw new IllegalArgumentException("Unknown number name: " + numberName);
         };
     }
 
     /**
-     * That funcion returns the relative long number of the string.
+     * That function returns the relative long number of the string.
      *
      * @param word: string to convert into a long number.
      * @return the long number.
@@ -176,9 +176,7 @@ public class Parser {
      * @return true if is not a number and false if it is.
      */
     private boolean isNotANumber(String string) {
-        for (String number : noNumbers) {
-            if (string.equalsIgnoreCase(number)) return true;
-        }
+        for (String number : noNumbers) if (string.equalsIgnoreCase(number)) return true;
         return false;
     }
 
